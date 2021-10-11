@@ -1,4 +1,3 @@
-
 CREATE VIEW SurrealismArts AS
 SELECT ID, Title, YearOfWork,ID_Period
 FROM Artworks
