@@ -1,18 +1,23 @@
-create procedure  PriceMax (@MaxPrice int,
-							@Period int)
-as
-begin
-select 
-Artworks.Id, Artworks.Title, Artworks.Price, Artworks.Title, Artworks.ID_Period, Artworks.ID_Artist, 
-Artists.ID, Artists.Lastname, Artists.Firstname
-From Artworks
-Inner Join Artists
-on
-Artworks.ID_Artist=Artists.ID
-Where Artworks.Price > @MaxPrice AND
-	Artworks.ID_Period = @Period
-end;
+CREATE PROCEDURE BiggerPrice (@Price int,
+			      @Period int)
+AS
+BEGIN
+SELECT 
+	W.Id, 
+	W.Title, 
+	W.Price, 
+	W.Title, 
+	W.ID_Period, 
+	W.ID_Artist, 
+	A.ID, 
+	A.Lastname, 
+	A.Firstname
+FROM Artworks W
+INNER JOIN Artists A
+ON
+W.ID_Artist=A.ID
+WHERE W.Price > @Price AND
+	  W.ID_Period = @Period
+END;
 
-execute PriceMax 800000, 4
-
-
+EXECUTE BiggerPrice 870000, 4;
