@@ -5,4 +5,4 @@ ON Purchases.ID_Artwork=Artworks.ID
 GROUP BY ID_Artwork, Artworks.Title
 HAVING COUNT (ID_Artwork)>1;
 
-SELECT * FROM Several;
+SELECT * FROM [Several];
