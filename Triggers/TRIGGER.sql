@@ -26,3 +26,17 @@ BEGIN
 INSERT INTO Artworks  (ID_Artist, Title, YearOfWork, ID_Period, Price)
       Values (@NID_Artist, @NTitle, @NYearOfWork, @NID_Period, @NPrice)
 END
+
+
+
+ throw 51000, 'CHECK ARTIST', 1
+ 
+ 
+ INSERT INTO Artworks  (ID_Artist, Title, YearOfWork, ID_Period, Price)
+--VALUES (4, 'The Anatomy Lesson of Dr. Nicolaes Tulp', 1632, 1, 89000);
+
+--VALUES(5, 'Coronation of Napoleon', 1814, 2, 126000);
+
+
+VALUES(6, 'The Absinthe Drinker', 1901, 3, 345000);
+--VALUES (8, 'Puberty', 1931, 4, 90000);
