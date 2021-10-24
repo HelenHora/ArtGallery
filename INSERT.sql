@@ -1,15 +1,3 @@
-USE ARTGALLERY
-
-DELETE FROM Purchases
-DELETE FROM Artworks
-DELETE FROM Customers
-DELETE FROM Artists
-DELETE FROM Periods
-DELETE FROM Birthplaces
-
-
-
-
 INSERT INTO Customers (Firstname, Lastname)
 VALUES 
 ('Paul', 'Lakoff'),
