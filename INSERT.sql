@@ -70,7 +70,7 @@ VALUES
 (9, 'Henry Ford Hospital (The Flying Bed)', 1932, 4, 870000);
 
 
-INSERT INTO Purchases(ID_Customer, ID_Artwork, DateOfPurchase) 
+INSERT INTO Purchases(ID_Customer, ID_Artwork, DateOfPurchase, PurchPrice) 
 VALUES
 (2, 8, '12/01/2019'),
 (2, 22, '12/01/2019'),
