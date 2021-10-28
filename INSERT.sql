@@ -1,15 +1,15 @@
 INSERT INTO Customers (Firstname, Lastname, Country)
 VALUES 
-('Paul', 'Lakoff', USA),
-('Marta', 'Vasylyk', Ukraine),
-('Anna', 'Antipa', Ukraine),
-('Karmen', 'Olsen', Canada),
-('Christopher', 'Jonas', USA),
-('Sebastian', 'Lean', Norway),
-('Stella', 'Rogers', Finland),
-('Thomas', 'Vendi', Italy),
-('Alice', 'Cooper', Macedonia),
-('Daniela', 'Rodrigo', Spain);
+('Paul', 'Lakoff', 'Canada'),
+('Marta', 'Vasylyk', 'Ukraine'),
+('Anna', 'Antipa', 'Ukraine'),
+('Karmen', 'Olsen', 'Canada'),
+('Christopher', 'Jonas', 'Norway'),
+('Sebastian', 'Lean', 'Norway'),
+('Stella', 'Rogers', 'Canada'),
+('Thomas', 'Vendi', 'Italy'),
+('Alice', 'Cooper', 'Norway'),
+('Daniela', 'Rodrigo', 'Italy');
 
 INSERT INTO Periods (Name) 
 VALUES
@@ -72,18 +72,19 @@ VALUES
 
 INSERT INTO Purchases(ID_Customer, ID_Artwork, DateOfPurchase, PurchPrice) 
 VALUES
-(2, 8, '12/01/2019'),
-(2, 22, '12/01/2019'),
-(3, 21, '03/05/2019'),
-(3, 5, '06/12/2020'),
-(4, 15, '10/13/2019'),
-(5, 24, '11/27/2020'),
-(6, 11, '09/30/2021'),
-(7, 1, '05/07/2018'),
-(9, 9, '09/09/2019'),
-(10, 7, '09/17/2021'),
-(10, 2, '09/17/2021'),
-(2, 24, '09/01/2021'),
-(5, 5, '07/16/2021'),
-(1, 1, '07/03/2020'),
-(4, 8, '03/16/2021');
+(2, 8, '12/01/2019', 89000),
+(2, 22, '12/01/2019',9000000),
+(3, 21, '03/05/2019',345000),
+(3, 5, '06/12/2020',40000),
+(4, 15, '10/13/2019',1450000),
+(5, 24, '11/27/2020',870000),
+(6, 11, '09/30/2021',789000),
+(7, 1, '05/07/2018',1000000),
+(9, 9, '09/09/2019',17000),
+(10, 7, '09/17/2021',12000),
+(10, 2, '09/17/2021',20000),
+(2, 24, '09/01/2021',900000),
+(5, 5, '07/16/2021',45000),
+(1, 1, '07/03/2020',1100000),
+(4, 8, '03/16/2021',100000);
+
