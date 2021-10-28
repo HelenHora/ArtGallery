@@ -1,15 +1,15 @@
-INSERT INTO Customers (Firstname, Lastname)
+INSERT INTO Customers (Firstname, Lastname, Country)
 VALUES 
-('Paul', 'Lakoff'),
-('Marta', 'Vasylyk'),
-('Anna', 'Antipa'),
-('Karmen', 'Olsen'),
-('Christopher', 'Jonas'),
-('Sebastian', 'Lean'),
-('Stella', 'Rogers'),
-('Thomas', 'Vendi'),
-('Alice', 'Cooper'),
-('Daniela', 'Rodrigo');
+('Paul', 'Lakoff', USA),
+('Marta', 'Vasylyk', Ukraine),
+('Anna', 'Antipa', Ukraine),
+('Karmen', 'Olsen', Canada),
+('Christopher', 'Jonas', USA),
+('Sebastian', 'Lean', Norway),
+('Stella', 'Rogers', Finland),
+('Thomas', 'Vendi', Italy),
+('Alice', 'Cooper', Macedonia),
+('Daniela', 'Rodrigo', Spain);
 
 INSERT INTO Periods (Name) 
 VALUES
