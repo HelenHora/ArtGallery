@@ -28,3 +28,11 @@ ID_Customer INT NOT NULL FOREIGN KEY REFERENCES Customers(ID),
 ID_Artwork INT NOT NULL FOREIGN KEY REFERENCES Artworks(ID),
 DateOfPurchase DATE NOT NULL,
 PurchPrice INT NOT NULL);
+
+Create TABLE PurchStat (ID INT NOT NULL IDENTITY PRIMARY KEY,
+PYearOfPurchases INT NOT NULL,
+PYearOfWork INT NOT NULL,
+PName VARCHAR (40) NOT NULL,
+PPurchPrice INT NOT NULL,
+ACountry VARCHAR (30) not null ,
+CCountry VARCHAR (30) not null);
