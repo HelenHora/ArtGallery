@@ -1,0 +1,27 @@
+CREATE VIEW nineteenthCenturyArts AS
+SELECT ID, Title, YearOfWork
+FROM OH_Artworks
+Where YearOfWork BETWEEN 1801 AND 1900;
+TABLESPACE OLENAHOROBETS;
+
+SELECT * FROM nineteenthCenturyArts;
+
+
+CREATE VIEW Several as
+SELECT ID_artwork, OH_Artworks.Title
+FROM OH_Purchases INNER JOIN OH_Artworks
+ON OH_Purchases.ID_Artwork=OH_Artworks.ID
+GROUP BY ID_Artwork, OH_Artworks.Title
+HAVING COUNT (ID_Artwork)>1;
+TABLESPACE OLENAHOROBETS;
+
+select * from Several;
+
+
+CREATE VIEW ExpressionismArtists AS
+SELECT OH_Artists.Id, OH_Artists.Firstname, OH_Artists.Lastname, OH_Artworks.ID_Period
+FROM OH_Artists Inner Join OH_Artworks
+ON OH_Artists.Id=OH_Artworks.ID_Artist 
+WHERE OH_Artworks.ID_Period=3;
+
+SELECT * FROM ExpressionismArtists;
