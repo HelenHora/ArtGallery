@@ -1,86 +1,81 @@
-create procedure InsertInto 
-(@PPYearOfPurchases int)
-as 
+CREATE PROCEDURE InsertInto (@PPYearOfPurchases INT)
+AS
+IF @PPYearOfPurchases IN (
+		SELECT PYearOfPurchases
+		FROM PurchStat
+		)
+BEGIN
+	THROW 51000
+		,'this year statistic already exists'
+		,1
+END
+ELSE
+BEGIN
+	DECLARE @PYearOfPurchases INT
+		,@PYearOfWork INT
+		,@PName VARCHAR(40)
+		,@PPurchPrice INT
+		,@ACountry VARCHAR(30)
+		,@CCountry VARCHAR(30)
 
+	DECLARE testcursor CURSOR
+	FOR
+	SELECT YEAR(DateOfPurchase) AS YearOfPurch
+		,W.YearOfWork
+		,D.Name
+		,P.PurchPrice
+		,B.Country
+		,C.country
+	FROM Artworks W
+	INNER JOIN Periods D ON W.ID_Period = D.ID
+	INNER JOIN Purchases P ON W.id = P.ID_Artwork
+	INNER JOIN Customers C ON P.ID_Customer = C.ID
+	INNER JOIN Artists A ON W.ID_Artist = A.ID
+	INNER JOIN Birthplaces B ON A.ID_Birthplace = B.ID
+	WHERE YEAR(DateOfPurchase) = @PPYearOfPurchases
+	ORDER BY P.DateOFPurchase
+		,W.YearOfWork
 
-  if @PPYearOfPurchases in (select PYearOfPurchases from PurchStat)
-  begin
-    THROW 51000, 'this year statistic already exists', 1
-  end
+	BEGIN TRAN
 
-  else 
+	OPEN testcursor
 
-  begin 
+	FETCH NEXT
+	FROM testcursor
+	INTO @PYearOfPurchases
+		,@PYearOfWork
+		,@PName
+		,@PPurchPrice
+		,@ACountry
+		,@CCountry
 
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		INSERT INTO PurchStat
+		VALUES (
+			@PYearOfPurchases
+			,@PYearOfWork
+			,@PName
+			,@PPurchPrice
+			,@ACountry
+			,@CCountry
+			)
 
+		FETCH NEXT
+		FROM testcursor
+		INTO @PYearOfPurchases
+			,@PYearOfWork
+			,@PName
+			,@PPurchPrice
+			,@ACountry
+			,@CCountry
+	END
+END
 
-    declare 
-    @PYearOfPurchases int,
-    @PYearOfWork int, 
-    @PName varchar(40), 
-    @PPurchPrice int,
-    @ACountry varchar(30),
-    @CCountry varchar(30)
+COMMIT TRAN;
 
-    declare testcursor cursor for 
-    select 
-      YEAR(DateOfPurchase) AS YearOfPurch,  
-    W.YearOfWork, 
-    D.Name,
-    P.PurchPrice,
-    B.Country, 
-    C.country
-    from Artworks W inner join Periods D
-    on W.ID_Period=D.ID
-    inner join Purchases P
-    on W.id=P.ID_Artwork
-    inner join Customers C
-    on P.ID_Customer=C.ID
-    inner join Artists  A
-    on W.ID_Artist=A.ID
-    Inner join Birthplaces B
-    on A.ID_Birthplace=B.ID
+CLOSE testcursor;
 
-    where YEAR(DateOfPurchase) = @PPYearOfPurchases
-    order by  P.DateOFPurchase, W.YearOfWork
-
-    begin tran
-    open testcursor
-    fetch next from testcursor into 
-    @PYearOfPurchases,
-    @PYearOfWork,
-    @PName,
-    @PPurchPrice,
-    @ACountry,
-    @CCountry
-    while @@FETCH_STATUS = 0 
-    begin 
-    insert into PurchStat values (
-    @PYearOfPurchases,
-    @PYearOfWork,
-    @PName,
-    @PPurchPrice,
-    @ACountry,
-    @CCountry)
-    
-    fetch next from testcursor into 
-    @PYearOfPurchases,
-    @PYearOfWork,
-    @PName,
-    @PPurchPrice,
-    @ACountry,
-    @CCountry
-
-    END
-
-  end
-
-
-commit tran;
-close testcursor;
-deallocate testcursor;
-
-
-
+DEALLOCATE testcursor;
 
 EXEC InsertInto @PPYearOfPurchases = 2020
