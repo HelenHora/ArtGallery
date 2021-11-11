@@ -1,0 +1,49 @@
+CREATE VIEW Several
+AS
+SELECT ID_artwork
+	,Artworks.Title
+FROM Purchases
+INNER JOIN Artworks ON Purchases.ID_Artwork = Artworks.ID
+GROUP BY ID_Artwork
+	,Artworks.Title
+HAVING COUNT(ID_Artwork) > 1;
+
+SELECT *
+FROM [Several];
+
+
+CREATE VIEW ExpressionismArtists
+AS
+SELECT DISTINCT Artists.Id
+	,Artists.Firstname
+	,Artists.Lastname
+	,Artworks.ID_Period
+FROM Artists
+INNER JOIN Artworks ON Artists.Id = Artworks.ID_Artist
+WHERE Artworks.ID_Period = 3;
+
+SELECT *
+FROM [ExpressionismArtists];
+
+
+CREATE VIEW SurrealismArts
+AS
+SELECT ID
+	,Title
+	,YearOfWork
+	,ID_Period
+FROM Artworks
+WHERE ID_Period = 4;
+
+SELECT *
+FROM [SurrealismArts];
+
+
+
+
+CREATE VIEW NineteenthCenturyArts AS
+SELECT ID, Title, YearOfWork
+FROM Artworks
+Where YearOfWork BETWEEN 1801 AND 1900;
+
+SELECT * FROM [NineteenthCenturyArts];
