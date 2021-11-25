@@ -1,0 +1,24 @@
+create or replace NONEDITIONABLE PROCEDURE BiggerPrice (B_Price int,
+			      B_Period int)
+IS
+  cur sys_refcursor;
+--AS
+
+BEGIN
+open cur for
+SELECT 
+	OH_Artworks.Id, 
+	OH_Artworks.Title, 
+	OH_Artworks.Price, 
+	OH_Artworks.Title, 
+	OH_Artworks.ID_Period, 
+	OH_Artworks.ID_Artist, 
+	OH_Artists.ID, 
+	OH_Artists.Lastname,
+	OH_Artists.Firstname
+FROM OH_Artworks 
+INNER JOIN OH_Artists  ON
+OH_Artworks.ID_Artist=OH_Artists.ID
+WHERE OH_Artworks.Price > B_Price AND
+	  OH_Artworks.ID_Period = B_Period;
+END;
