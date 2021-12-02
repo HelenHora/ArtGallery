@@ -7,3 +7,14 @@ SET Firstname = LTRIM(RTRIM(inserted.Firstname))
 FROM Artists
 JOIN inserted ON Artists.ID = inserted.ID
 WHERE Artists.ID = inserted.ID;
+
+INSERT INTO Artists (
+	Firstname
+	,Lastname
+	,ID_Birthplace
+	)
+VALUES (
+	'   Claude'
+	,' Monet   '
+	,4
+	);
