@@ -1,0 +1,59 @@
+CREATE OR REPLACE NONEDITIONABLE PROCEDURE pr_InsertInto (PPYearOfPurchases IN int)
+
+is
+    CURSOR TestCursor IS SELECT  
+    EXTRACT(year FROM P.DATEOFPURCHASE) as  YearOfPurch,
+    W.YearOfWork as YearOfWork , 
+    D.Name as Name ,
+    P.PurchPrice as PurchPrice,
+    B.Country as Acountry, 
+    C.country as Ccountry
+    from OH_Artworks W inner join OH_Periods D
+    on W.ID_Period=D.ID
+    inner join OH_Purchases P
+    on W.id=P.ID_Artwork
+    inner join OH_Customers C
+    on P.ID_Customer=C.ID
+    inner join OH_Artists  A
+    on W.ID_Artist=A.ID
+    Inner join OH_Birthplaces B
+    on A.ID_Birthplace=B.ID
+    where  EXTRACT(year FROM P.DATEOFPURCHASE) = PPYearOfPurchases;
+    --order by  P.DateOFPurchase, W.YearOfWork;
+
+    TestRecord TestCursor%ROWTYPE;
+   -- year_already_exists EXCEPTION;
+    --PRAGMA exception_init( year_already_exists, -20001 );
+BEGIN 
+
+ -- IF PPYearOfPurchases IN (select PYearOfPurchases from OH_PurchStat)
+ --THEN
+  --  RAISE year_already_exists;
+ -- ELSE
+    OPEN  TestCursor;
+        --BEGIN TRANSACTION;
+        LOOP
+            EXIT WHEN TestCursor%NOTFOUND;
+            FETCH TestCursor INTO TestRecord;
+            INSERT INTO  
+            OH_PurchStat (                      PYearOfPurchases,
+                                                PYearOfWork,
+                                                PName,
+                                                PPurchPrice,
+                                                ACountry,
+                                                CCountry )
+            
+            VALUES(  TestRecord.YearOfPurch, 
+                                                TestRecord.YearOfWork, 
+                                                TestRecord.Name,
+                                                TestRecord.PurchPrice,
+                                                TestRecord.ACountry, 
+                                                TestRecord.CCountry );
+        END LOOP;
+    
+        --COMMIT TRANSACTION;
+       -- CLOSE TestCursor;
+ -- END IF;
+END;
+
+--EXEC pr_InsertInto (2017);

@@ -1,0 +1,25 @@
+create or replace NONEDITIONABLE TRIGGER TRIMNAMES 
+	BEFORE INSERT OR UPDATE ON OH_Artists
+	FOR EACH ROW
+
+BEGIN
+	:NEW.FIRSTNAME := TRIM (:NEW.FIRSTNAME);
+    :NEW.LASTNAME := TRIM (:NEW.LASTNAME);
+END;
+
+
+
+INSERT INTO OH_Artists (
+	Firstname
+	,Lastname
+	,ID_Birthplace
+	)
+VALUES (
+	'   Claude'
+	,' Monet   '
+	,4
+	);
+
+
+delete from oh_artists
+where id = 42 (??)

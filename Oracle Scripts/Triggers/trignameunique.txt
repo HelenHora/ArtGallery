@@ -1,0 +1,35 @@
+create or replace NONEDITIONABLE TRIGGER  NameUnique
+BEFORE INSERT 
+ON OH_Artworks
+FOR EACH ROW 
+
+DECLARE
+check_arist EXCEPTION;
+NumRecords INT;
+ begin 
+
+select count(*) into NumRecords
+from OH_Artworks A
+where a.title=:new.title;
+IF NumRecords > 0 
+THEN
+
+RAISE check_arist;
+END IF;
+END;
+
+
+INSERT INTO OH_Artworks (
+	ID_Artist
+	,Title
+	,YearOfWork
+	,ID_Period
+	,Price
+	)
+VALUES (
+	6
+	,'The Absinthe Drinker'
+	,1901
+	,3
+	,345000
+	);
