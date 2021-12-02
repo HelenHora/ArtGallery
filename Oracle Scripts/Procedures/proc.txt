@@ -1,0 +1,24 @@
+create or replace NONEDITIONABLE PROCEDURE blah
+(IDNewPurchase IN INT,
+IDArtwork IN INT)
+
+AS 
+BEGIN
+UPDATE OH_Artworks
+SET Price = (
+SELECT PurchPrice
+FROM oh_purchases
+WHERE ID = IDNewPurchase) 
+WHERE ID = IDArtwork;
+ COMMIT;
+ END;
+
+select * from oh_artworks
+
+select * from oh_purchases
+
+
+INSERT INTO OH_Purchases(ID_Customer, ID_Artwork, DateOfPurchase, PurchPrice) 
+VALUES(4, 22, '11-mar-2020',9100000);
+
+execute blah ( , )
